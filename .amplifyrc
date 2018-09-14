@@ -1,0 +1,14 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "reddit-20180908165405-authRole",
+            "UnauthRoleArn": "arn:aws:iam::847136656635:role/reddit-20180908165405-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::847136656635:role/reddit-20180908165405-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "reddit-20180908165405-deployment",
+            "UnauthRoleName": "reddit-20180908165405-unauthRole",
+            "StackName": "reddit-20180908165405",
+            "StackId": "arn:aws:cloudformation:us-east-1:847136656635:stack/reddit-20180908165405/79231610-b3c2-11e8-abf5-500c28604c4a"
+        }
+    }
+}

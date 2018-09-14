@@ -1,0 +1,53 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "reddit-20180908165405-authRole",
+			"UnauthRoleArn": "arn:aws:iam::847136656635:role/reddit-20180908165405-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::847136656635:role/reddit-20180908165405-authRole",
+			"Region": "us-east-1",
+			"DeploymentBucketName": "reddit-20180908165405-deployment",
+			"UnauthRoleName": "reddit-20180908165405-unauthRole",
+			"StackName": "reddit-20180908165405",
+			"StackId": "arn:aws:cloudformation:us-east-1:847136656635:stack/reddit-20180908165405/79231610-b3c2-11e8-abf5-500c28604c4a"
+		}
+	},
+	"hosting": {
+		"S3AndCloudFront": {
+			"service": "S3AndCloudFront",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/reddit-20180908165405-deployment/amplify-cfn-templates/hosting/template.json",
+				"logicalId": "hostingS3AndCloudFront"
+			},
+			"lastPushTimeStamp": "2018-09-09T00:11:01.046Z",
+			"output": {
+				"S3BucketSecureURL": "https://system-re.s3.amazonaws.com",
+				"WebsiteURL": "http://system-re.s3-website-us-east-1.amazonaws.com",
+				"Region": "us-east-1",
+				"HostingBucketName": "system-re"
+			},
+			"lastPushDirHash": "BtAY6K2k/E6BGFFA36/Kc+nBiqo="
+		}
+	},
+	"auth": {
+		"cognito9b1e0244": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/reddit-20180908165405-deployment/amplify-cfn-templates/auth/cognito9b1e0244-cloudformation-template.yml",
+				"logicalId": "authcognito9b1e0244"
+			},
+			"lastPushTimeStamp": "2018-09-09T00:11:01.053Z",
+			"output": {
+				"AppClientSecret": "1b6fn8kaleadr1ssa6uonu3r0rmnp4i6li87013boalrg89pgctd",
+				"UserPoolId": "us-east-1_vJnA1dqJi",
+				"AppClientIDWeb": "3v5ccfnba1fl9bv8u2f7nvvvcf",
+				"AppClientID": "243ca9n6qie0essu4iqb59hais",
+				"IdentityPoolId": "us-east-1:f5ad41d7-cb2e-4379-a0f5-92f2ff611c4d",
+				"IdentityPoolName": "cognito9b1e0244_identitypool_9b1e0244",
+				"UserPoolName": "cognito9b1e0244_userpool_9b1e0244"
+			},
+			"lastPushDirHash": "c4b+J+4rz2SVY4uzl19kaRf4Rlg="
+		}
+	}
+}
