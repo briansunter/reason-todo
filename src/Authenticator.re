@@ -16,11 +16,26 @@ let getToken: authData => string = [%raw
 module Authenticator = {
   type authState = string;
   type onStateChange = (authState, authData) => unit;
-
-  let make = (~onStateChange, children) =>
+  module AuthProps = {
+    [@bs.deriving abstract]
+    type t = {
+      authState,
+      onStateChange,
+    };
+  };
+  [@bs.obj]
+  external makeProps:
+    (~authState: authState=?, ~onStateChange: onStateChange=?, unit) => _ =
+    "";
+  let make =
+      (
+        ~authState: option(authState)=?,
+        ~onStateChange: option(onStateChange)=?,
+        children,
+      ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass=authenticator,
-      ~props={"onStateChange": onStateChange},
+      ~props=makeProps(~authState?, ~onStateChange?, ()),
       children,
     );
 };

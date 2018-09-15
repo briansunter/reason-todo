@@ -1,5 +1,16 @@
 [%bs.raw {|require('../../../src/Index.scss')|}];
 
+module AddButton = {
+  let component = ReasonReact.statelessComponent("Todo");
+  let make = _children => {
+    ...component,
+    render: _ =>
+      <Router.NavLink route=Page2>
+        <MaterialUi.Button className="fab" color=`Primary variant=`Fab />
+      </Router.NavLink>,
+  };
+};
+
 ReactDOMRe.renderToElementWithId(
   <Authenticator.WithAuthenticator>
     ...{
@@ -8,13 +19,14 @@ ReactDOMRe.renderToElementWithId(
            switch (authState) {
            | Some(s) =>
              <Router.WithRouter>
-               ...((~currentRoute) =>
+               ...(
+                    (~currentRoute) =>
                       <ReasonApollo.Provider
-                        client={AppSyncClient.client(Authenticator.getToken(s))}>
+                        client={
+                          AppSyncClient.client(Authenticator.getToken(s))
+                        }>
                         <App currentRoute />
-                 <MaterialUi.Button className="fab" color=`Primary variant=`Fab>
-                 <div></div>
-                 </MaterialUi.Button>
+                        <AddButton />
                       </ReasonApollo.Provider>
                   )
              </Router.WithRouter>

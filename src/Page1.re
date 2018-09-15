@@ -1,4 +1,4 @@
-type todo = {id: string};
+type todo = {name: string};
 type todos = array(todo);
 type items = option(todos);
 
@@ -9,7 +9,7 @@ module GetTodos = [%graphql
     query todos {
         listTodos(limit:100) @bsRecord{
           items @bsRecord {
-            id
+            name
           }
         }
       }
@@ -21,7 +21,7 @@ module TodoItem = {
   let make = (~todo: todo, _children) => {
     ...component,
     render: _ =>
-      <li className="todoItem"> {ReasonReact.string(todo.id)} </li>,
+      <li className="todoItem"> {ReasonReact.string(todo.name)} </li>,
   };
 };
 
@@ -30,16 +30,18 @@ module TodoList = {
   let make = (~todos: todos, _children) => {
     ...component,
     render: _ =>
-      <ul className="todoList">
-        {
-          ReasonReact.array(
-            Array.mapi(
-              (i, t) => <TodoItem key={string_of_int(i)} todo=t />,
-              todos,
-            ),
-          )
-        }
-      </ul>,
+      <div>
+        <ul className="todoList">
+          {
+            ReasonReact.array(
+              Array.mapi(
+                (i, t) => <TodoItem key={string_of_int(i)} todo=t />,
+                todos,
+              ),
+            )
+          }
+        </ul>
+      </div>,
   };
 };
 
