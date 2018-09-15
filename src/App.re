@@ -1,6 +1,23 @@
 [%bs.raw {|require('../../../src/App.scss')|}];
 
-[@bs.val] [@bs.scope "performance"] external now : unit => float = "";
+[@bs.val] [@bs.scope "performance"] external now: unit => float = "";
+
+let routeToComponent = currentRoute => {
+  let withCSSTransition = (component, route) =>
+    <ReactTransitionGroup.CSSTransition
+      show=true
+      timeout=900
+      key={Config.routeToTitle(route)}
+      classNames="routeTransition">
+      component
+    </ReactTransitionGroup.CSSTransition>;
+  switch (currentRoute) {
+  | Config.Home => withCSSTransition(<Home />, Home)
+  | Config.Page1 => withCSSTransition(<Page1 />, Page1)
+  | Config.Page2 => withCSSTransition(<Page2 />, Page2)
+  | Config.Page3 => withCSSTransition(<Page3 />, Page3)
+  };
+};
 
 type user = {
   name: string,
@@ -121,40 +138,40 @@ let make = (~currentRoute, _children) => {
     let (x, _t) = List.hd(List.rev(self.state.nav.position));
     let (x', _t') = List.hd(self.state.nav.position);
     <div
-      className=("App" ++ (self.state.nav.isOpen ? " overlay" : ""))
-      onClick=(_event => self.send(ToggleMenu(false)))
-      onTouchStart=(
+      className={"App" ++ (self.state.nav.isOpen ? " overlay" : "")}
+      onClick={_event => self.send(ToggleMenu(false))}
+      onTouchStart={
         event =>
           self.send(
             TouchStart(
               Utils.TouchList.first(ReactEventRe.Touch.changedTouches(event))##clientX,
             ),
           )
-      )
-      onTouchMove=(
+      }
+      onTouchMove={
         event =>
           self.send(
             TouchMove(
               Utils.TouchList.first(ReactEventRe.Touch.changedTouches(event))##clientX,
             ),
           )
-      )
-      onTouchEnd=(
+      }
+      onTouchEnd={
         event =>
           self.send(
             TouchEnd(
               Utils.TouchList.first(ReactEventRe.Touch.changedTouches(event))##clientX,
             ),
           )
-      )>
+      }>
       <header>
         <a
-          onClick=(
+          onClick={
             event => {
               ReactEventRe.Mouse.stopPropagation(event);
-              self.send(ToggleMenu(! self.state.nav.isOpen));
+              self.send(ToggleMenu(!self.state.nav.isOpen));
             }
-          )>
+          }>
           <svg viewBox="0 0 24 24">
             <path
               d="M21 11h-18c-0.6 0-1 0.4-1 1s0.4 1 1 1h18c0.6 0 1-0.4 1-1s-0.4-1-1-1z"
@@ -167,12 +184,12 @@ let make = (~currentRoute, _children) => {
             />
           </svg>
         </a>
-        <h1> (ReasonReact.string(Config.routeToTitle(currentRoute))) </h1>
+        <h1> {ReasonReact.string(Config.routeToTitle(currentRoute))} </h1>
       </header>
       <nav
-        className=(self.state.nav.isOpen ? "active" : "")
-        onClick=(event => ReactEventRe.Mouse.stopPropagation(event))
-        style=(
+        className={self.state.nav.isOpen ? "active" : ""}
+        onClick={event => ReactEventRe.Mouse.stopPropagation(event)}
+        style={
           self.state.nav.isSwiping^ ?
             ReactDOMRe.Style.make(
               ~transform=
@@ -183,8 +200,8 @@ let make = (~currentRoute, _children) => {
               (),
             ) :
             ReactDOMRe.Style.make()
-        )
-        ref=(
+        }
+        ref={
           self.handle((ref, self) =>
             self.state.nav.width :=
               (
@@ -194,54 +211,54 @@ let make = (~currentRoute, _children) => {
                 }
               )
           )
-        )>
+        }>
         <header className="sticky-header">
-          <a onClick=(_event => self.send(ToggleMenu(false)))>
+          <a onClick={_event => self.send(ToggleMenu(false))}>
             <svg viewBox="0 0 32 32">
               <path
                 d="M12.586 27.414l-10-10c-0.781-0.781-0.781-2.047 0-2.828l10-10c0.781-0.781 2.047-0.781 2.828 0s0.781 2.047 0 2.828l-6.586 6.586h19.172c1.105 0 2 0.895 2 2s-0.895 2-2 2h-19.172l6.586 6.586c0.39 0.39 0.586 0.902 0.586 1.414s-0.195 1.024-0.586 1.414c-0.781 0.781-2.047 0.781-2.828 0z"
               />
             </svg>
-            (ReasonReact.string(Config.routeToTitle(currentRoute)))
+            {ReasonReact.string(Config.routeToTitle(currentRoute))}
           </a>
           <svg viewBox="0 0 32 32">
             <path
               d="M8 10c0-4.418 3.582-8 8-8s8 3.582 8 8c0 4.418-3.582 8-8 8s-8-3.582-8-8zM24 20h-16c-4.418 0-8 3.582-8 8v2h32v-2c0-4.418-3.582-8-8-8z"
             />
           </svg>
-          <p> (ReasonReact.string(self.state.user.name)) </p>
-          <p> (ReasonReact.string(self.state.user.email)) </p>
+          <p> {ReasonReact.string(self.state.user.name)} </p>
+          <p> {ReasonReact.string(self.state.user.email)} </p>
         </header>
-        <label> (ReasonReact.string("home")) </label>
+        <label> {ReasonReact.string("home")} </label>
         <ul>
           <li>
             <Router.NavLink route=Home>
-              (ReasonReact.string("Home"))
+              {ReasonReact.string("Home")}
             </Router.NavLink>
           </li>
         </ul>
-        <label> (ReasonReact.string("pages")) </label>
+        <label> {ReasonReact.string("pages")} </label>
         <ul>
           <li>
             <Router.NavLink route=Page1>
-              (ReasonReact.string("Page11"))
+              {ReasonReact.string("Page11")}
             </Router.NavLink>
           </li>
           <li>
             <Router.NavLink route=Page2>
-              (ReasonReact.string("Page2"))
+              {ReasonReact.string("Page2")}
             </Router.NavLink>
           </li>
           <li>
             <Router.NavLink route=Page3>
-              (ReasonReact.string("Page3"))
+              {ReasonReact.string("Page3")}
             </Router.NavLink>
           </li>
         </ul>
       </nav>
       <main>
         <ReactTransitionGroup.TransitionGroup>
-          (Config.routeToComponent(currentRoute))
+          {routeToComponent(currentRoute)}
         </ReactTransitionGroup.TransitionGroup>
       </main>
     </div>;

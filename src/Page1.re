@@ -16,6 +16,17 @@ module GetTodos = [%graphql
 |}
 ];
 
+module AddButton = {
+  let component = ReasonReact.statelessComponent("AddButton");
+  let make = _children => {
+    ...component,
+    render: _ =>
+      <Router.NavLink route=Page2>
+        <MaterialUi.Button className="fab" color=`Primary variant=`Fab />
+      </Router.NavLink>,
+  };
+};
+
 module TodoItem = {
   let component = ReasonReact.statelessComponent("Todo");
   let make = (~todo: todo, _children) => {
@@ -41,6 +52,7 @@ module TodoList = {
             )
           }
         </ul>
+        <AddButton />
       </div>,
   };
 };
