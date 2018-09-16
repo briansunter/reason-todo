@@ -1,3 +1,4 @@
+[%bs.raw {|require('../../../src/Index.scss')|}];
 module AddTodo = [%graphql
   {|
    mutation createTodo($name: String!) {
@@ -30,7 +31,7 @@ let make = _children => {
       <AddTodoMutation>
         ...{
              (mutation, _) =>
-               <div>
+               <div className="list-container">
                  <h1> {ReasonReact.string("Add Todo")} </h1>
                  <MaterialUi.TextField
                    value={`String(_self.state.todoName)}
@@ -53,7 +54,12 @@ let make = _children => {
                          ~variables=newTodo##variables,
                          ~refetchQueries=[|"todos"|],
                        )
-                       |> (r => Js.log(r()));
+                       |> (
+                         r => {
+                           r() |> ignore;
+                           ReasonReact.Router.push("/");
+                         }
+                       );
                      }
                    }>
                    <p> {ReasonReact.string("save")} </p>

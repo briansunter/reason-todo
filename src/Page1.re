@@ -1,3 +1,4 @@
+[%bs.raw {|require('../../../src/Index.scss')|}];
 type todo = {name: string};
 type todos = array(todo);
 type items = option(todos);

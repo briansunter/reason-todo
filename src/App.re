@@ -19,6 +19,23 @@ let routeToComponent = currentRoute => {
   };
 };
 
+let routeToHeader = currentRoute => {
+  let withCSSTransition = (component, route) =>
+    <ReactTransitionGroup.CSSTransition
+      show=true
+      timeout=900
+      key={Config.routeToTitle(route)}
+      classNames="routeTransition">
+      component
+    </ReactTransitionGroup.CSSTransition>;
+  switch (currentRoute) {
+  | Config.Home => withCSSTransition(<Home />, Home)
+  | Config.Page1 => withCSSTransition(<Page1 />, Page1)
+  | Config.Page2 => withCSSTransition(<Page2 />, Page2)
+  | Config.Page3 => withCSSTransition(<Page3 />, Page3)
+  };
+};
+
 type user = {
   name: string,
   email: string,
@@ -256,11 +273,9 @@ let make = (~currentRoute, _children) => {
           </li>
         </ul>
       </nav>
-      <main>
-        <ReactTransitionGroup.TransitionGroup>
-          {routeToComponent(currentRoute)}
-        </ReactTransitionGroup.TransitionGroup>
-      </main>
+      <ReactTransitionGroup.TransitionGroup>
+        {routeToComponent(currentRoute)}
+      </ReactTransitionGroup.TransitionGroup>
     </div>;
   },
 };
