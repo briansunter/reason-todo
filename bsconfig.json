@@ -17,10 +17,10 @@
   "suffix": ".bs.js",
   "namespace": true,
   "bs-dependencies": [
-    "reason-react", "re-classnames",
+    "reason-react",
+    "re-classnames",
     "reason-apollo",
     "@jsiebern/bs-material-ui"
-
   ],
   "refmt": 3,
   "warnings": {

@@ -22,7 +22,9 @@ module AddButton = {
     ...component,
     render: _ =>
       <Router.NavLink route=Page2>
-        <MaterialUi.Button className="fab" color=`Primary variant=`Fab />
+        <MaterialUi.Button className="fab" color=`Primary variant=`Fab>
+          {ReasonReact.string("+")}
+        </MaterialUi.Button>
       </Router.NavLink>,
   };
 };

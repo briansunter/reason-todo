@@ -51,7 +51,7 @@ let make = _children => {
                        Js.log(newTodo);
                        mutation(
                          ~variables=newTodo##variables,
-                         ~refetchQueries=[|"listTodos"|],
+                         ~refetchQueries=[|"todos"|],
                        )
                        |> (r => Js.log(r()));
                      }

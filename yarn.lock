@@ -906,6 +906,10 @@ browserify-zlib@^0.2.0:
   dependencies:
     pako "~1.0.5"
 
+bs-material-ui-icons@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/bs-material-ui-icons/-/bs-material-ui-icons-0.2.0.tgz#a2ac4f48bfdf98a9261b5f271f6ae21d7ea7228f"
+
 bs-platform@latest:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-4.0.5.tgz#d4fd9bbdd11765af5b75110a5655065ece05eed6"
